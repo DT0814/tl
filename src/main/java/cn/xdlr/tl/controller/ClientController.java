@@ -20,6 +20,7 @@ public class ClientController {
     @Autowired
     private ClientService service;
 
+
     @RequestMapping("request")
     public LoginRequestResult request(Integer cid, HttpSession session) {
         String random = RandomStringUtils.generateString(128);
