@@ -24,6 +24,7 @@ public class ClientController {
     public LoginRequestResult request(Integer cid, HttpSession session) {
         String random = RandomStringUtils.generateString(128);
         session.setAttribute(cid + "", random);
+
         return LoginRequestResult.getInstance(ResultCode.SUCCESS, random);
     }
 
