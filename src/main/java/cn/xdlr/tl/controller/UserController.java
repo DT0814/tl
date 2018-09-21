@@ -22,15 +22,10 @@ public class UserController {
         return "hello";
     }
 
-    @GetMapping("register")
-    public SimpleResult register(Integer uid, String uinf, String Acode, HttpSession session) {
-        String random = (String) session.getAttribute(uid + "");
-        if (null == random || random.equals("")) {
-
-            return SimpleResult.getInstance(ResultCode.SUCCESS);
-        } else {
-            return SimpleResult.getInstance(ResultCode.CONFIRM_NO_PASS_FAIL);
-        }
+    @GetMapping("init")
+    public SimpleResult register(Integer uid, String uinfo) {
+        service.init(uid, uinfo);
+        return SimpleResult.getInstance(ResultCode.SUCCESS);
     }
 
     @GetMapping("update")

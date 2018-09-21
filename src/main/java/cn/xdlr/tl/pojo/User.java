@@ -36,7 +36,6 @@ public class User {
     }
 
 
-
     public Integer getUid() {
         return uid;
     }

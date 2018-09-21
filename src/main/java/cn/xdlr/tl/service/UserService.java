@@ -13,15 +13,14 @@ public class UserService {
     @Autowired
     private UserDao dao;
 
-    public User findById(Integer id) {
-        Optional<User> obj = dao.findById(id);
-        return obj.get();
-    }
-
-
     public void update(Integer uid, String uinf) {
         User one = dao.getOne(uid);
         one.setUinfo(uinf);
         dao.saveAndFlush(one);
+    }
+
+    public void init(Integer uid, String uinfo) {
+        User user = new User(uid, uinfo);
+        dao.saveAndFlush(user);
     }
 }
