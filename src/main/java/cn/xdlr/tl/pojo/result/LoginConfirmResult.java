@@ -2,7 +2,7 @@ package cn.xdlr.tl.pojo.result;
 
 public class LoginConfirmResult {
     private int retCode;
-    private String authCode;
+    private String AuthCode;
 
     public static LoginConfirmResult getInstance(int retCode, String authCode) {
         return new LoginConfirmResult(retCode, authCode);
@@ -10,7 +10,7 @@ public class LoginConfirmResult {
 
     public LoginConfirmResult(int retCode, String authCode) {
         this.retCode = retCode;
-        this.authCode = authCode;
+        this.AuthCode = authCode;
     }
 
     public int getRetCode() {
@@ -21,11 +21,11 @@ public class LoginConfirmResult {
         this.retCode = retCode;
     }
 
-    public String getRandom() {
-        return authCode;
+    public String getAuthCode() {
+        return AuthCode;
     }
 
-    public void setRandom(String random) {
-        this.authCode = random;
+    public void setAuthCode(String authCode) {
+        AuthCode = authCode;
     }
 }

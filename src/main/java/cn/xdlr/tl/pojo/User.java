@@ -10,7 +10,6 @@ import javax.persistence.Table;
 @Table(name = "tl_user")
 public class User {
     @Id
-    @GeneratedValue
     private Integer uid;
     private String uinfo;
     private Integer value;

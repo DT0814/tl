@@ -24,6 +24,14 @@ public class UserToken {
     public UserToken() {
     }
 
+    public UserToken(int value, int uid, String reason, String url, Date time) {
+        this.value = value;
+        this.uid = uid;
+        this.reason = reason;
+        this.url = url;
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "UserToken{" +

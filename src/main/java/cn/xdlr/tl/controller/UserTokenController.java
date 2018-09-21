@@ -2,6 +2,8 @@ package cn.xdlr.tl.controller;
 
 import cn.xdlr.tl.pojo.UserToken;
 import cn.xdlr.tl.pojo.result.SimpleResult;
+import cn.xdlr.tl.pojo.result.TokenQueryHistoryResult;
+import cn.xdlr.tl.pojo.result.TokenQueryValueResult;
 import cn.xdlr.tl.service.UserService;
 import cn.xdlr.tl.service.UserTokenService;
 import cn.xdlr.tl.utils.ResultCode;
@@ -23,8 +25,49 @@ public class UserTokenController {
     }
 
     @RequestMapping("/init")
-    public SimpleResult init(@RequestParam(name = "id") Integer uid, Integer value) {
-        service.init(uid, value);
+    public SimpleResult init(@RequestParam(name = "id") Integer uid, Integer value, String reason) {
+        if (null == uid || uid <= 0 || null == value || null == reason) {
+            return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
+        }
+        service.init(uid, value, reason);
         return SimpleResult.getInstance(ResultCode.SUCCESS);
+    }
+
+    @RequestMapping("/tran")
+    public SimpleResult tran(Integer from, Integer to, Integer value, String note) {
+        if (null == from || from <= 0 || null == to || to <= 0 || null == value || null == note) {
+            return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
+        }
+        return service.tran(from, to, value, note);
+    }
+
+    @RequestMapping("/update")
+    public SimpleResult update(@RequestParam(name = "id") Integer uid, Integer value, String reason, String url) {
+        if (null == uid || uid <= 0 || null == reason || null == value || null == url) {
+            return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
+        }
+        return service.update(uid, value, reason, url);
+    }
+
+    @RequestMapping("/queryValue")
+    public TokenQueryValueResult queryValue(@RequestParam(name = "id") Integer uid) {
+        if (null == uid || uid <= 0) {
+            return TokenQueryValueResult.getInstance(ResultCode.PARAMETER_ERROR, 0);
+        }
+        return service.queryValue(uid);
+    }
+
+    @RequestMapping("/queryHistory")
+    public TokenQueryHistoryResult queryHistory(@RequestParam(name = "id") Integer uid, Integer pageNum, Integer pageSize) {
+        if (null == uid || uid <= 0) {
+            return TokenQueryHistoryResult.getInstance(ResultCode.PARAMETER_ERROR, null);
+        }
+        if (null == pageNum) {
+            pageNum = 1;
+        }
+        if (null == pageSize) {
+            pageSize = 10;
+        }
+        return service.queryHistory(uid, pageNum, pageSize);
     }
 }

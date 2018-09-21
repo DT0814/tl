@@ -19,13 +19,17 @@ public class UserController {
 
     @GetMapping("init")
     public SimpleResult init(Integer uid, String uinfo) {
-        service.init(uid, uinfo);
-        return SimpleResult.getInstance(ResultCode.SUCCESS);
+        if (null == uid || uid <= 0 || null == uinfo) {
+            return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
+        }
+        return service.init(uid, uinfo);
     }
 
     @GetMapping("update")
     public SimpleResult update(Integer uid, String uinfo) {
-        service.update(uid,uinfo);
-        return SimpleResult.getInstance(ResultCode.SUCCESS);
+        if (null == uid || uid <= 0 || null == uinfo) {
+            return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
+        }
+        return service.update(uid, uinfo);
     }
 }
