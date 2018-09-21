@@ -34,20 +34,11 @@ public class UserController {
     }
 
     @GetMapping("update")
-    public SimpleResult update(Integer uid, String uinf, String Acode, HttpSession session) {
-        String random = (String) session.getAttribute(uid + "");
-        if(null == random || random.equals("")) {
+    public SimpleResult update(Integer uid, String uinfo) {
+        service.update(uid,uinfo);
 
-            return SimpleResult.getInstance(ResultCode.CONFIRM_NO_PASS_FAIL);
-        } else {
-            User user = service.findById(uid);
-            if (Acode.equals(user.getId())) {
-                user.setUinfo(uinf);
-                return SimpleResult.getInstance(ResultCode.SUCCESS);
-            } else {
-                return SimpleResult.getInstance(ResultCode.CONFIRM_NO_PASS_FAIL);
-            }
-        }
+        return SimpleResult.getInstance(ResultCode.SUCCESS);
+
     }
 
 }

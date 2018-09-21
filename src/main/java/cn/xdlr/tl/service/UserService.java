@@ -19,4 +19,9 @@ public class UserService {
     }
 
 
+    public void update(Integer uid, String uinf) {
+        User one = dao.getOne(uid);
+        one.setUinfo(uinf);
+        dao.saveAndFlush(one);
+    }
 }

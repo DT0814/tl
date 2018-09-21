@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class User {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer uid;
     private String uinfo;
     private Integer value;
 
@@ -21,22 +21,28 @@ public class User {
         this.uinfo = uinfo;
         this.value = value;
     }
+    public User(Integer uid,String uinfo) {
+        this.uid = uid;
+        this.uinfo = uinfo;
+    }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + uid +
                 ", uinfo='" + uinfo + '\'' +
                 ", value=" + value +
                 '}';
     }
 
-    public Integer getId() {
-        return id;
+
+
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public String getUinfo() {
