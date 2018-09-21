@@ -17,28 +17,15 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping("/hello")
-    public String test() {
-        return "hello";
-    }
-
-    @GetMapping("register")
-    public SimpleResult register(Integer uid, String uinf, String Acode, HttpSession session) {
-        String random = (String) session.getAttribute(uid + "");
-        if (null == random || random.equals("")) {
-
-            return SimpleResult.getInstance(ResultCode.SUCCESS);
-        } else {
-            return SimpleResult.getInstance(ResultCode.CONFIRM_NO_PASS_FAIL);
-        }
+    @GetMapping("init")
+    public SimpleResult init(Integer uid, String uinfo) {
+        service.init(uid, uinfo);
+        return SimpleResult.getInstance(ResultCode.SUCCESS);
     }
 
     @GetMapping("update")
     public SimpleResult update(Integer uid, String uinfo) {
         service.update(uid,uinfo);
-
         return SimpleResult.getInstance(ResultCode.SUCCESS);
-
     }
-
 }
