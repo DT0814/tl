@@ -1,5 +1,6 @@
 package cn.xdlr.tl.pojo;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

@@ -17,13 +17,8 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping("/hello")
-    public String test() {
-        return "hello";
-    }
-
     @GetMapping("init")
-    public SimpleResult register(Integer uid, String uinfo) {
+    public SimpleResult init(Integer uid, String uinfo) {
         service.init(uid, uinfo);
         return SimpleResult.getInstance(ResultCode.SUCCESS);
     }
@@ -31,9 +26,6 @@ public class UserController {
     @GetMapping("update")
     public SimpleResult update(Integer uid, String uinfo) {
         service.update(uid,uinfo);
-
         return SimpleResult.getInstance(ResultCode.SUCCESS);
-
     }
-
 }
