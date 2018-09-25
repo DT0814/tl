@@ -1,7 +1,7 @@
 package cn.xdlr.tl.utils;
 
 public class ResultCode {
-    public static int SUCCESS = 200;
+    public static int SUCCESS = 0;
     public static int FAIL = 400;
     public static int PARAMETER_ERROR = 401;
 
