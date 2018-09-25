@@ -21,7 +21,7 @@ public class User {
         this.uinfo = uinfo;
         this.value = value;
     }
-    public User(Integer uid,String uinfo) {
+    public User(Integer uid, String uinfo) {
         this.uid = uid;
         this.uinfo = uinfo;
     }

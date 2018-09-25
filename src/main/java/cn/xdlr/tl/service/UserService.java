@@ -18,6 +18,7 @@ public class UserService {
         }
         User one = dao.getOne(uid);
         one.setUinfo(uinfo);
+
         dao.saveAndFlush(one);
         return SimpleResult.getInstance(ResultCode.SUCCESS);
     }

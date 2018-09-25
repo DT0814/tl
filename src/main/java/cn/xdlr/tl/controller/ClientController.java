@@ -11,6 +11,7 @@ import cn.xdlr.tl.utils.ResultCode;
 import cn.xdlr.tl.utils.SHA256Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletContext;
@@ -78,4 +79,6 @@ public class ClientController {
         service.add(client);
         return SimpleResult.getInstance(ResultCode.SUCCESS);
     }
+
+
 }
