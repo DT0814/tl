@@ -7,6 +7,7 @@ import cn.xdlr.tl.pojo.UserToken;
 import cn.xdlr.tl.pojo.result.SimpleResult;
 import cn.xdlr.tl.pojo.result.TokenQueryHistoryResult;
 import cn.xdlr.tl.pojo.result.TokenQueryValueResult;
+import cn.xdlr.tl.pojo.result.UseTokenResult;
 import cn.xdlr.tl.utils.ResultCode;
 import org.apache.tomcat.websocket.TransformationResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,5 +102,22 @@ public class UserTokenService {
         Example<UserToken> example = Example.of(userToken, matcher);
         Page<UserToken> all = userTokenDao.findAll(example, pageable);
         return TokenQueryHistoryResult.getInstance(ResultCode.SUCCESS, all.getContent(), (int) all.getTotalElements());
+    }
+
+    @Transactional
+    public UseTokenResult useToken(Integer uid, Integer orderId, Integer amount) {
+        if (!userDao.existsById(uid)) {
+            return UseTokenResult.getInstance(ResultCode.TOKEN_USER_NOT_FOUND, 0);
+        }
+        User user = userDao.getOne(uid);
+        if (user.getValue() < amount) {
+            //余额不足扣扣费失败
+            return UseTokenResult.getInstance(ResultCode.SUCCESS, -1);
+        }
+        user.setValue(user.getValue() - amount);
+        userDao.saveAndFlush(user);
+        UserToken userToken = new UserToken(-amount, uid, "消费订单ID：" + orderId, "", new Date());
+        userTokenDao.saveAndFlush(userToken);
+        return UseTokenResult.getInstance(ResultCode.SUCCESS, user.getValue());
     }
 }

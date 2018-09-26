@@ -4,6 +4,7 @@ import cn.xdlr.tl.pojo.UserToken;
 import cn.xdlr.tl.pojo.result.SimpleResult;
 import cn.xdlr.tl.pojo.result.TokenQueryHistoryResult;
 import cn.xdlr.tl.pojo.result.TokenQueryValueResult;
+import cn.xdlr.tl.pojo.result.UseTokenResult;
 import cn.xdlr.tl.service.UserService;
 import cn.xdlr.tl.service.UserTokenService;
 import cn.xdlr.tl.utils.ResultCode;
@@ -70,5 +71,14 @@ public class UserTokenController {
         }
 
         return service.queryHistory(uid, pageNum - 1, pageSize);
+    }
+
+    @RequestMapping("/useToken")
+    public UseTokenResult useToken(Integer orderId, Integer amount, Integer uid) {
+        if (null == uid || uid <= 0 || orderId < 1 || amount < 1) {
+            return UseTokenResult.getInstance(ResultCode.PARAMETER_ERROR, 0);
+        }
+
+        return service.useToken(uid, orderId, amount);
     }
 }
