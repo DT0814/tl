@@ -7,17 +7,20 @@ import java.util.List;
 public class TokenQueryHistoryResult {
     private int retCode;
     private List<UserToken> value;
+    private Integer total;
 
-    public static TokenQueryHistoryResult getInstance(int retCode, List<UserToken> value) {
-        return new TokenQueryHistoryResult(retCode, value);
+
+    public static TokenQueryHistoryResult getInstance(int retCode, List<UserToken> value, int total) {
+        return new TokenQueryHistoryResult(retCode, value, total);
     }
 
     public TokenQueryHistoryResult() {
     }
 
-    public TokenQueryHistoryResult(int retCode, List<UserToken> value) {
+    public TokenQueryHistoryResult(int retCode, List<UserToken> value, Integer total) {
         this.retCode = retCode;
         this.value = value;
+        this.total = total;
     }
 
     public int getRetCode() {
@@ -35,4 +38,13 @@ public class TokenQueryHistoryResult {
     public void setValue(List<UserToken> value) {
         this.value = value;
     }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
 }

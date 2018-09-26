@@ -88,7 +88,7 @@ public class UserTokenService {
 
     public TokenQueryHistoryResult queryHistory(Integer uid, Integer pageNum, Integer pageSize) {
         if (!userDao.existsById(uid)) {
-            return TokenQueryHistoryResult.getInstance(ResultCode.TOKEN_USER_NOT_FOUND, null);
+            return TokenQueryHistoryResult.getInstance(ResultCode.TOKEN_USER_NOT_FOUND, null, 0);
         }
         Sort sort = new Sort(Sort.Direction.DESC, "time");
         Pageable pageable = PageRequest.of(pageNum, pageSize, sort);
@@ -100,6 +100,6 @@ public class UserTokenService {
                 .withIgnorePaths("reason").withIgnorePaths("url");
         Example<UserToken> example = Example.of(userToken, matcher);
         Page<UserToken> all = userTokenDao.findAll(example, pageable);
-        return TokenQueryHistoryResult.getInstance(ResultCode.SUCCESS, all.getContent());
+        return TokenQueryHistoryResult.getInstance(ResultCode.SUCCESS, all.getContent(), (int) all.getTotalElements());
     }
 }

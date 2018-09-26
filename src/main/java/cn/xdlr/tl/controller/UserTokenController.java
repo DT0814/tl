@@ -59,15 +59,16 @@ public class UserTokenController {
 
     @RequestMapping("/queryHistory")
     public TokenQueryHistoryResult queryHistory(@RequestParam(name = "id") Integer uid, Integer pageNum, Integer pageSize) {
-        if (null == uid || uid <= 0) {
-            return TokenQueryHistoryResult.getInstance(ResultCode.PARAMETER_ERROR, null);
-        }
         if (null == pageNum) {
-            pageNum = 1;
+            pageNum = 0;
         }
         if (null == pageSize) {
             pageSize = 10;
         }
-        return service.queryHistory(uid, pageNum, pageSize);
+        if (null == uid || uid <= 0 || pageNum < 1 || pageSize < 1) {
+            return TokenQueryHistoryResult.getInstance(ResultCode.PARAMETER_ERROR, null, 0);
+        }
+
+        return service.queryHistory(uid, pageNum - 1, pageSize);
     }
 }
