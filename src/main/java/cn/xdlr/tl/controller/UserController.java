@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping("init")
     public SimpleResult init(Integer uid, String uinfo) {
-        if (null == uid || uid <= 0 || null == uinfo) {
+        if (null == uid || uid <= 0 || null == uinfo || uinfo.trim().equals("")) {
             return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
         }
         return service.init(uid, uinfo);
@@ -27,7 +27,7 @@ public class UserController {
 
     @GetMapping("update")
     public SimpleResult update(Integer uid, String uinfo) {
-        if (null == uid || uid <= 0 || null == uinfo) {
+        if (null == uid || uid <= 0 || null == uinfo || uinfo.trim().equals("")) {
             return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
         }
         return service.update(uid, uinfo);

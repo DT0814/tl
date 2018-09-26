@@ -38,7 +38,7 @@ public class ClientController {
 
     @RequestMapping("out")
     public SimpleResult out(Integer cid, String Acode) {
-        if (null == cid || cid <= 0 || null == Acode || Acode.equals("")) {
+        if (null == cid || cid <= 0 || null == Acode || Acode.trim().equals("")) {
             return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
         }
         boolean b = clientAcodeService.out(cid, Acode);
