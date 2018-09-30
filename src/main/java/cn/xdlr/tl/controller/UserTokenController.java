@@ -67,7 +67,7 @@ public class UserTokenController {
             pageSize = 10;
         }
         if (null == uid || uid <= 0 || pageNum < 1 || pageSize < 1) {
-            return TokenQueryHistoryResult.getInstance(ResultCode.PARAMETER_ERROR, null, 0);
+            return TokenQueryHistoryResult.getInstance(ResultCode.PARAMETER_ERROR, null, 0L);
         }
 
         return service.queryHistory(uid, pageNum - 1, pageSize);

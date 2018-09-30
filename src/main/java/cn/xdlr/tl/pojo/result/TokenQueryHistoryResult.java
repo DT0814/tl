@@ -1,23 +1,24 @@
 package cn.xdlr.tl.pojo.result;
 
 import cn.xdlr.tl.pojo.UserToken;
+import sun.rmi.runtime.Log;
 
 import java.util.List;
 
 public class TokenQueryHistoryResult {
     private int retCode;
     private List<UserToken> value;
-    private Integer total;
+    private Long total;
 
 
-    public static TokenQueryHistoryResult getInstance(int retCode, List<UserToken> value, int total) {
+    public static TokenQueryHistoryResult getInstance(int retCode, List<UserToken> value, Long total) {
         return new TokenQueryHistoryResult(retCode, value, total);
     }
 
     public TokenQueryHistoryResult() {
     }
 
-    public TokenQueryHistoryResult(int retCode, List<UserToken> value, Integer total) {
+    public TokenQueryHistoryResult(int retCode, List<UserToken> value, Long total) {
         this.retCode = retCode;
         this.value = value;
         this.total = total;
@@ -39,11 +40,11 @@ public class TokenQueryHistoryResult {
         this.value = value;
     }
 
-    public Integer getTotal() {
+    public Long getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Long total) {
         this.total = total;
     }
 
