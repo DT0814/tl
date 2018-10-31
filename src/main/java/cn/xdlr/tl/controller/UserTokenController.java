@@ -8,6 +8,7 @@ import cn.xdlr.tl.pojo.result.UseTokenResult;
 import cn.xdlr.tl.service.UserService;
 import cn.xdlr.tl.service.UserTokenService;
 import cn.xdlr.tl.utils.ResultCode;
+import cn.xdlr.tl.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ public class UserTokenController {
 
     @RequestMapping("/init")
     public SimpleResult init(@RequestParam(name = "id") Integer uid, Integer value, String reason) {
-        if (null == uid || uid <= 0 || null == value || null == reason || reason.trim().equals("")) {
+        if (null == uid || uid <= 0 || null == value ||  StringUtil.isEmpty(reason)) {
             return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
         }
         service.init(uid, value, reason);
@@ -36,7 +37,7 @@ public class UserTokenController {
 
     @RequestMapping("/tran")
     public SimpleResult tran(Integer from, Integer to, Integer value, String note) {
-        if (null == from || from <= 0 || null == to || to <= 0 || null == value || null == note || note.trim().equals("")) {
+        if (null == from || from <= 0 || null == to || to <= 0 || null == value || StringUtil.isEmpty(note)) {
             return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
         }
         return service.tran(from, to, value, note);
@@ -44,7 +45,7 @@ public class UserTokenController {
 
     @RequestMapping("/update")
     public SimpleResult update(@RequestParam(name = "id") Integer uid, Integer value, String reason, String url) {
-        if (null == uid || uid <= 0 || null == value || null == reason || reason.trim().equals("") || null == url || url.trim().equals("")) {
+        if (null == uid || uid <= 0 || null == value || StringUtil.isEmpty(reason) || StringUtil.isEmpty(url)) {
             return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
         }
         return service.update(uid, value, reason, url);

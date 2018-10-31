@@ -9,6 +9,7 @@ import cn.xdlr.tl.service.ClientService;
 import cn.xdlr.tl.utils.RandomStringUtils;
 import cn.xdlr.tl.utils.ResultCode;
 import cn.xdlr.tl.utils.SHA256Utils;
+import cn.xdlr.tl.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +32,9 @@ public class ClientController {
         if (null == cid || cid <= 0) {
             return LoginRequestResult.getInstance(ResultCode.PARAMETER_ERROR, "");
         }
+        if (!service.exist(cid)) {
+            return LoginRequestResult.getInstance(ResultCode.REQUEST_CLIENT_NOT_FOUND, "");
+        }
         String random = RandomStringUtils.generateString(128);
         session.getServletContext().setAttribute("cid=" + cid, random);
         return LoginRequestResult.getInstance(ResultCode.SUCCESS, random);
@@ -38,7 +42,7 @@ public class ClientController {
 
     @RequestMapping("out")
     public SimpleResult out(Integer cid, String Acode) {
-        if (null == cid || cid <= 0 || null == Acode || Acode.trim().equals("")) {
+        if (null == cid || cid <= 0 || StringUtil.isEmpty(Acode)) {
             return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
         }
         boolean b = clientAcodeService.out(cid, Acode);
@@ -54,8 +58,8 @@ public class ClientController {
             return LoginConfirmResult.getInstance(ResultCode.PARAMETER_ERROR, "");
         }
         String random = (String) session.getServletContext().getAttribute("cid=" + cid);
-        if (null == random || random.equals("")) {
-            return null;
+        if (StringUtil.isEmpty(random)) {
+            return LoginConfirmResult.getInstance(ResultCode.LOGIN_CONFIRM_NOT_REQUEST, "");
         } else {
             Client client = service.findById(cid);
             if (null == client) {
