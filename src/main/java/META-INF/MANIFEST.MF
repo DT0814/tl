@@ -1,3 +1,30 @@
 Manifest-Version: 1.0
+Class-Path: spring-data-commons-2.0.10.RELEASE.jar spring-beans-5.0.9.
+ RELEASE.jar jboss-logging-3.3.2.Final.jar jaxb-api-2.3.0.jar spring-e
+ xpression-5.0.9.RELEASE.jar validation-api-2.0.1.Final.jar spring-dat
+ a-jpa-2.0.10.RELEASE.jar log4j-api-2.10.0.jar spring-web-5.0.9.RELEAS
+ E.jar spring-boot-starter-data-jpa-2.0.5.RELEASE.jar spring-boot-star
+ ter-tomcat-2.0.5.RELEASE.jar antlr-2.7.7.jar spring-webmvc-5.0.9.RELE
+ ASE.jar spring-core-5.0.9.RELEASE.jar log4j-to-slf4j-2.10.0.jar jacks
+ on-databind-2.9.6.jar jackson-datatype-jdk8-2.9.6.jar hibernate-commo
+ ns-annotations-5.0.1.Final.jar spring-orm-5.0.9.RELEASE.jar hibernate
+ -jpa-2.1-api-1.0.2.Final.jar spring-boot-starter-json-2.0.5.RELEASE.j
+ ar spring-boot-starter-aop-2.0.5.RELEASE.jar logback-classic-1.2.3.ja
+ r hamcrest-core-1.3.jar hibernate-core-5.2.17.Final.jar javax.transac
+ tion-api-1.2.jar HikariCP-2.7.9.jar jackson-datatype-jsr310-2.9.6.jar
+  mysql-connector-java-5.1.47.jar spring-jdbc-5.0.9.RELEASE.jar spring
+ -context-5.0.9.RELEASE.jar jackson-core-2.9.6.jar slf4j-api-1.7.25.ja
+ r spring-boot-2.0.5.RELEASE.jar javax.annotation-api-1.3.2.jar jul-to
+ -slf4j-1.7.25.jar logback-core-1.2.3.jar hibernate-validator-6.0.12.F
+ inal.jar mariadb-java-client-2.2.6.jar spring-aop-5.0.9.RELEASE.jar s
+ pring-boot-starter-jdbc-2.0.5.RELEASE.jar jackson-module-parameter-na
+ mes-2.9.6.jar spring-boot-starter-logging-2.0.5.RELEASE.jar spring-tx
+ -5.0.9.RELEASE.jar jackson-annotations-2.9.0.jar aspectjweaver-1.8.13
+ .jar spring-boot-starter-2.0.5.RELEASE.jar spring-boot-starter-web-2.
+ 0.5.RELEASE.jar tomcat-embed-el-8.5.34.jar jandex-2.0.3.Final.jar jav
+ assist-3.22.0-GA.jar tomcat-embed-websocket-8.5.34.jar snakeyaml-1.19
+ .jar classmate-1.3.4.jar dom4j-1.6.1.jar spring-jcl-5.0.9.RELEASE.jar
+  spring-aspects-5.0.9.RELEASE.jar spring-boot-autoconfigure-2.0.5.REL
+ EASE.jar junit-4.12.jar tomcat-embed-core-8.5.34.jar
 Main-Class: cn.xdlr.tl.TlApplication
 
