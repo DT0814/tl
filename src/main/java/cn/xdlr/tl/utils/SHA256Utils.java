@@ -47,9 +47,7 @@ public class SHA256Utils {
 
     @Test
     public void test() {
-        String sha256StrJava = sha256("123456", "ApjXYc7i2zYFucqFDveGqhbnh1tfzwKnZHHMscrFxS4PYvBPa1WbfGnC3WU9WreDHY3PpsTlcp1GhlQM86txerWaPI7ToBfDiUdASyxuLHpOxkwPkcWZS4jRiC7GkfLY");
+        String sha256StrJava = sha256("123456", "xNQ2YD69lJW5HaC4ydZmAFxknn98hea67iwc9JQnRTrXwINvH6trXhBAMqsyQu4svLo9YziDWB6kt4bUPJrIneN8WzfFyc3xG3MgzVvCkZZ8V8D2DeUH1aJ4iTV9VH4J");
         System.out.println(sha256StrJava);
-        String sha256StrJava2 = sha256("hehe", "MPFKDFf7te1DhdDkI3fyubp3aMUAw6BmIYNd70ncZL2vRMQfSPcgKQmgX3r14yXLD5Rl4eGtlafcQgxhK0gS1KqxdHUa2JiQuZr3cqM6cZHvf8OATiiApTX7e3e3OlIp");
-        System.out.println(sha256StrJava2);
     }
 }

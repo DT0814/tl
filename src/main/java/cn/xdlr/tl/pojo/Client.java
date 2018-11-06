@@ -13,7 +13,6 @@ public class Client {
     private int cid;
     private String pass;
     private String info;
-
     public Client() {
     }
 
