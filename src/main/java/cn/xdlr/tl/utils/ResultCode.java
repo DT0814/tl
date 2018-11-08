@@ -6,6 +6,8 @@ public class ResultCode {
     public static final int FAIL = 400;
     //请求参数检验失败
     public static final int PARAMETER_ERROR = 401;
+    //请求拦截,acode错误
+    public static final int ACODE_NO_EQUALS = 402;
 
     //接入系统请求认证失败(随机数加密密码错误)
     public static final int CONFIRM_NO_PASS_FAIL = 411;

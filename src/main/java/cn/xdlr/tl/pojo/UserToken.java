@@ -16,7 +16,7 @@ public class UserToken {
     @GeneratedValue
     private int id;
     private int value;
-    private int uid;
+    private String uid;
     private String reason;
     private String url;
     private Date time;
@@ -24,7 +24,7 @@ public class UserToken {
     public UserToken() {
     }
 
-    public UserToken(int value, int uid, String reason, String url, Date time) {
+    public UserToken(int value, String uid, String reason, String url, Date time) {
         this.value = value;
         this.uid = uid;
         this.reason = reason;
@@ -60,11 +60,11 @@ public class UserToken {
         this.value = value;
     }
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 

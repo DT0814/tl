@@ -16,7 +16,7 @@ import java.util.Date;
 @Table(name = "tl_user")
 public class User {
     @Id
-    private Integer uid;
+    private String uid;
     private String uinfo;
     private Integer value;
     private String name;
@@ -30,7 +30,7 @@ public class User {
     public User() {
     }
 
-    public User(Integer uid) {
+    public User(String uid) {
         this.uid = uid;
     }
 
@@ -39,7 +39,7 @@ public class User {
         this.value = value;
     }
 
-    public User(Integer uid, String uinfo) {
+    public User(String uid, String uinfo) {
         this.uid = uid;
         this.uinfo = uinfo;
     }
@@ -90,11 +90,11 @@ public class User {
         this.age = age;
     }
 
-    public Integer getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(Integer uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 

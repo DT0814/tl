@@ -4,6 +4,9 @@ public class LoginConfirmResult {
     private int retCode;
     private String AuthCode;
 
+    public LoginConfirmResult() {
+    }
+
     public static LoginConfirmResult getInstance(int retCode, String authCode) {
         return new LoginConfirmResult(retCode, authCode);
     }

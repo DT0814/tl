@@ -17,7 +17,11 @@ public class ClientAcodeService {
     }
 
     public ClientAcode findById(Integer cid) {
-        return dao.getOne(cid);
+        if (dao.existsById(cid)) {
+            ClientAcode one = dao.getOne(cid);
+            return one;
+        } else return null;
+
     }
 
     public boolean out(Integer cid, String acode) {

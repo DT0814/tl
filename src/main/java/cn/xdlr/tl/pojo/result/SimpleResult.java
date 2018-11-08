@@ -18,4 +18,14 @@ public class SimpleResult {
     public static SimpleResult getInstance(int retCode) {
         return new SimpleResult(retCode);
     }
+
+    public SimpleResult() {
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleResult{" +
+                "retCode=" + retCode +
+                '}';
+    }
 }

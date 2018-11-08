@@ -5,10 +5,13 @@ import cn.xdlr.tl.pojo.User;
 import cn.xdlr.tl.pojo.result.SimpleResult;
 import cn.xdlr.tl.utils.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.UserTransaction;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -26,8 +29,20 @@ public class UserService {
         return SimpleResult.getInstance(ResultCode.SUCCESS);
     }
 
+    public User getOneById(String uid) {
+        ExampleMatcher matcher = ExampleMatcher.matching().
+                withIgnorePaths("uinfo", "value", "name", "age", "inTime", "outTime", "state", "imgPath")
+                .withMatcher("uid", ExampleMatcher.GenericPropertyMatchers.contains());
+        Example<User> example = Example.of(new User(uid), matcher);
+
+        Optional<User> one = dao.findOne(example);
+        boolean present = one.isPresent();
+        return present ? one.get() : null;
+    }
+
     public SimpleResult update(User user) {
-        User one = dao.getOne(user.getUid());
+
+        User one = getOneById(user.getUid());
         if (user.getValue() != null) {
             one.setValue(user.getValue());
         }
@@ -56,12 +71,12 @@ public class UserService {
         return SimpleResult.getInstance(ResultCode.SUCCESS);
     }
 
-    public boolean exist(Integer uid) {
-        return dao.existsById(uid);
+    public boolean exist(String uid) {
+        return getOneById(uid) != null;
     }
 
-    public SimpleResult init(Integer uid, String uinfo) {
-        if (dao.existsById(uid)) {
+    public SimpleResult init(String uid, String uinfo) {
+        if (exist(uid)) {
             return SimpleResult.getInstance(ResultCode.USER_EXISTS);
         }
         User user = new User(uid, uinfo);
@@ -71,8 +86,8 @@ public class UserService {
         return SimpleResult.getInstance(ResultCode.SUCCESS);
     }
 
-    public void parkTimeAward(Integer uid, Date time) {
-        User user = dao.getOne(uid);
+    public void parkTimeAward(String uid, Date time) {
+        User user = getOneById(uid);
         Date inTime = user.getInTime();
         long l = time.getTime() - inTime.getTime();
         int value = (int) (l * 0.1);

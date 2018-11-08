@@ -26,8 +26,8 @@ public class UserController {
     private UserTokenService userTokenService;
 
     @GetMapping("init")
-    public SimpleResult init(Integer uid, String uinfo) {
-        if (null == uid || uid <= 0 || StringUtil.isEmpty(uinfo)) {
+    public SimpleResult init(String uid, String uinfo) {
+        if (StringUtil.isEmpty(uid) || StringUtil.isEmpty(uinfo)) {
             return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
         }
         return service.init(uid, uinfo);
@@ -46,7 +46,7 @@ public class UserController {
             , @RequestParam(name = "Ustate") String state, @RequestParam(name = "Uimage") String base64Img
             , @RequestParam(name = "Utime") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date time) {
         Long t1 = System.currentTimeMillis();
-        User user = new User(new Integer(uid));
+        User user = new User(uid);
         switch (state) {
             case "入口":
                 if (service.exist(user.getUid())) {
@@ -84,7 +84,7 @@ public class UserController {
         return SimpleResult.getInstance(ResultCode.SUCCESS);
     }
 
-    private String Base64ToImg(String base64, Integer uid) {
+    private String Base64ToImg(String base64, String uid) {
         String path = uploadPath + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "/" + uid + ".jpg";
         String aStatic = ClassUtils.getDefaultClassLoader().getResource("").getPath();
         Base64ImageUtils.Base64ToImage(base64, aStatic + "/" + path);

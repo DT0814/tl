@@ -24,13 +24,15 @@ public class UserTokenService {
     private UserTokenDao userTokenDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserService userService;
 
     @Transactional
-    public SimpleResult init(Integer uid, Integer value, String reason) {
-        if (!userDao.existsById(uid)) {
+    public SimpleResult init(String uid, Integer value, String reason) {
+        if (!userService.exist(uid)) {
             return SimpleResult.getInstance(ResultCode.TOKEN_FROM_USER_NOT_FOUND);
         }
-        User one = userDao.getOne(uid);
+        User one = userService.getOneById(uid);
         one.setValue(value);
         userDao.saveAndFlush(one);
         UserToken userToken = new UserToken(value, uid, reason, "", new Date());
@@ -39,20 +41,20 @@ public class UserTokenService {
     }
 
     @Transactional
-    public SimpleResult tran(Integer from, Integer to, Integer value, String note) {
+    public SimpleResult tran(String from, String to, Integer value, String note) {
 
-        if (!userDao.existsById(from)) {
+        if (!userService.exist(from)) {
             return SimpleResult.getInstance(ResultCode.TOKEN_FROM_USER_NOT_FOUND);
         }
-        if (!userDao.existsById(to)) {
+        if (!userService.exist(to)) {
             return SimpleResult.getInstance(ResultCode.TOKEN_TO_USER_NOT_FOUND);
         }
 
-        User fromUser = userDao.getOne(from);
+        User fromUser = userService.getOneById(from);
         if (fromUser.getValue() < value) {
             return SimpleResult.getInstance(ResultCode.TOKEN_USER_BALANCE_NOT_ENOUGH);
         }
-        User toUser = userDao.getOne(to);
+        User toUser = userService.getOneById(to);
 
         fromUser.setValue(fromUser.getValue() - value);
         userDao.saveAndFlush(fromUser);
@@ -67,11 +69,11 @@ public class UserTokenService {
     }
 
     @Transactional
-    public SimpleResult update(Integer uid, Integer value, String reason, String url) {
-        if (!userDao.existsById(uid)) {
+    public SimpleResult update(String uid, Integer value, String reason, String url) {
+        if (!userService.exist(uid)) {
             return SimpleResult.getInstance(ResultCode.TOKEN_USER_NOT_FOUND);
         }
-        User one = userDao.getOne(uid);
+        User one = userService.getOneById(uid);
         one.setValue(one.getValue() + value);
         userDao.saveAndFlush(one);
         userTokenDao.saveAndFlush(new UserToken(value, uid, reason, url, new Date()));
@@ -87,8 +89,8 @@ public class UserTokenService {
         return TokenQueryValueResult.getInstance(ResultCode.SUCCESS, value);
     }
 
-    public TokenQueryHistoryResult queryHistory(Integer uid, Integer pageNum, Integer pageSize) {
-        if (!userDao.existsById(uid)) {
+    public TokenQueryHistoryResult queryHistory(String uid, Integer pageNum, Integer pageSize) {
+        if (!userService.exist(uid)) {
             return TokenQueryHistoryResult.getInstance(ResultCode.TOKEN_USER_NOT_FOUND, null, 0L);
         }
         Sort sort = new Sort(Sort.Direction.DESC, "time");
@@ -105,11 +107,11 @@ public class UserTokenService {
     }
 
     @Transactional
-    public UseTokenResult useToken(Integer uid, Integer orderId, Integer amount) {
-        if (!userDao.existsById(uid)) {
+    public UseTokenResult useToken(String uid, Integer orderId, Integer amount) {
+        if (!userService.exist(uid)) {
             return UseTokenResult.getInstance(ResultCode.TOKEN_USER_NOT_FOUND, 0);
         }
-        User user = userDao.getOne(uid);
+        User user = userService.getOneById(uid);
         if (user.getValue() < amount) {
             //余额不足扣扣费失败
             return UseTokenResult.getInstance(ResultCode.SUCCESS, -1);

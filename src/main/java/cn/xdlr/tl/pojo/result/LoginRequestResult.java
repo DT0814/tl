@@ -4,6 +4,10 @@ public class LoginRequestResult {
     private int retCode;
     private String random;
 
+    public LoginRequestResult() {
+
+    }
+
     public static LoginRequestResult getInstance(int retCode, String random) {
         return new LoginRequestResult(retCode, random);
     }
