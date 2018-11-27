@@ -89,9 +89,11 @@ public class UserService {
     public void parkTimeAward(String uid, Date time) {
         User user = getOneById(uid);
         Date inTime = user.getInTime();
-        long l = time.getTime() - inTime.getTime();
-        int value = (int) (l * 0.1);
-        user.setValue(user.getValue() + value);
+        if (null != inTime) {
+            long l = time.getTime() - inTime.getTime();
+            int value = (int) (l * 0.1);
+            user.setValue(user.getValue() + value);
+        }
         user.setState(2);
         dao.saveAndFlush(user);
     }

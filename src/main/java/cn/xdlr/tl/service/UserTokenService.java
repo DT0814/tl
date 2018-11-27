@@ -122,4 +122,21 @@ public class UserTokenService {
         userTokenDao.saveAndFlush(userToken);
         return UseTokenResult.getInstance(ResultCode.SUCCESS, user.getValue());
     }
+
+    @Transactional
+    public SimpleResult venderUseToken(String uid, Integer value, String oNumber) {
+        if (!userService.exist(uid)) {
+            return SimpleResult.getInstance(ResultCode.TOKEN_USER_NOT_FOUND);
+        }
+        User user = userService.getOneById(uid);
+        if (user.getValue() < value) {
+            //余额不足扣扣费失败
+            return SimpleResult.getInstance(ResultCode.TOKEN_USER_BALANCE_NOT_ENOUGH);
+        }
+        user.setValue(user.getValue() - value);
+        userDao.saveAndFlush(user);
+        UserToken userToken = new UserToken(-value, uid, "消费订单ID：" + oNumber, "", new Date(), oNumber);
+        userTokenDao.saveAndFlush(userToken);
+        return SimpleResult.getInstance(ResultCode.SUCCESS);
+    }
 }

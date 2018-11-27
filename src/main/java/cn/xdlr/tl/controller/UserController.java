@@ -41,14 +41,29 @@ public class UserController {
         return service.updateUinfo(uid, uinfo);
     }
 
+    @PostMapping("VenderUseToken")
+    public SimpleResult venderUseToken(@RequestParam(name = "Uid") String uid,
+                                       @RequestParam(name = "Value") Integer value,
+                                       @RequestParam(name = "Onumber") String oNumber) {
+        if (StringUtil.isEmpty(uid) || null == value || StringUtil.isEmpty(oNumber)) {
+            return SimpleResult.getInstance(ResultCode.PARAMETER_ERROR);
+        }
+        return userTokenService.venderUseToken(uid, value, oNumber);
+    }
+
     @PostMapping("PutUserState")
     public SimpleResult PutUserState(@RequestParam(name = "Uid") String uid
             , @RequestParam(name = "Ustate") String state, @RequestParam(name = "Uimage") String base64Img
             , @RequestParam(name = "Utime") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date time) {
         Long t1 = System.currentTimeMillis();
         User user = new User(uid);
+        System.out.println(uid);
+        System.out.println(state);
+        System.out.println(base64Img.length());
+        base64Img = base64Img.replaceAll(" ", "+");
+        System.out.println(base64Img);
         switch (state) {
-            case "入口":
+            case "ENTRANCE":
                 if (service.exist(user.getUid())) {
                     user.setInTime(time);
                     user.setState(1);
@@ -61,7 +76,7 @@ public class UserController {
                     service.update(user);
                 }
                 break;
-            case "出口":
+            case "EXPORT":
                 if (service.exist(user.getUid())) {
                     service.parkTimeAward(user.getUid(), time);
                 } else {
@@ -72,7 +87,7 @@ public class UserController {
                     service.update(user);
                 }
                 break;
-            case "售货机":
+            case "VENDING_MACHINE":
                 if (!service.exist(user.getUid())) {
                     service.init(user.getUid(), "");
                     user.setImgPath(Base64ToImg(base64Img, user.getUid()));

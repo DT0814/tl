@@ -20,6 +20,7 @@ public class UserToken {
     private String reason;
     private String url;
     private Date time;
+    private String oNumber;
 
     public UserToken() {
     }
@@ -30,6 +31,15 @@ public class UserToken {
         this.reason = reason;
         this.url = url;
         this.time = time;
+    }
+
+    public UserToken(int value, String uid, String reason, String url, Date time, String oNumber) {
+        this.value = value;
+        this.uid = uid;
+        this.reason = reason;
+        this.url = url;
+        this.time = time;
+        this.oNumber = oNumber;
     }
 
     @Override
@@ -91,5 +101,13 @@ public class UserToken {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getoNumber() {
+        return oNumber;
+    }
+
+    public void setoNumber(String oNumber) {
+        this.oNumber = oNumber;
     }
 }

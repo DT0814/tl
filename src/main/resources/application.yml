@@ -1,7 +1,8 @@
 spring:
       datasource:
           driver-class-name: com.mysql.jdbc.Driver
-          url: jdbc:mysql://222.25.188.1:50173/tl
+          #url: jdbc:mysql://222.25.188.1:50173/tl
+          url: jdbc:mysql://localhost:3306/tl
           username: root
           password: 123456
 
@@ -12,3 +13,7 @@ spring:
         open-in-view: true
 server:
   port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    context-path: /
