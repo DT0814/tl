@@ -18,6 +18,7 @@ public class TlApplication {
         SpringApplication.run(TlApplication.class, args);
 
     }
+
     @Bean
     public OpenEntityManagerInViewFilter openEntityManagerInViewFilter(){
         return new OpenEntityManagerInViewFilter();

@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "client_acode")
 public class ClientAcode {
     @Id
-    private int cid;
+    private Integer cid;
     private String acode;
     private Date time;
 
@@ -36,11 +36,11 @@ public class ClientAcode {
         this.time = time;
     }
 
-    public int getCid() {
+    public Integer getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 

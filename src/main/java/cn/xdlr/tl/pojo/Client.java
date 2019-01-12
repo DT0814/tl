@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Client {
     @Id
     @GeneratedValue
-    private int cid;
+    private Integer cid;
     private String pass;
     private String info;
     public Client() {
@@ -30,11 +30,11 @@ public class Client {
                 '}';
     }
 
-    public int getCid() {
+    public Integer getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 

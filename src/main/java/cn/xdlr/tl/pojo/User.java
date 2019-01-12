@@ -3,6 +3,7 @@ package cn.xdlr.tl.pojo;
 import cn.xdlr.tl.utils.CustomDateSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.jws.soap.SOAPBinding;
@@ -17,14 +18,22 @@ import java.util.Date;
 public class User {
     @Id
     private String uid;
+
     private String uinfo;
+
     private Integer value;
+
     private String name;
+
     private Integer age;
+
     private Date inTime;
+
     private Date outTime;
+
     //1入口 2出口 3售货机
     private Integer state;
+
     private String imgPath;
 
     public User() {
@@ -42,6 +51,16 @@ public class User {
     public User(String uid, String uinfo) {
         this.uid = uid;
         this.uinfo = uinfo;
+    }
+
+    public User(String uid, String uinfo, Integer value,Date inTime, Date outTime, Integer state, String imgPath) {
+        this.uid = uid;
+        this.uinfo = uinfo;
+        this.value = value;
+        this.inTime = inTime;
+        this.outTime = outTime;
+        this.state = state;
+        this.imgPath = imgPath;
     }
 
     @JsonSerialize(using = CustomDateSerializer.class)

@@ -9,14 +9,12 @@ import cn.xdlr.tl.pojo.result.TokenQueryHistoryResult;
 import cn.xdlr.tl.pojo.result.TokenQueryValueResult;
 import cn.xdlr.tl.pojo.result.UseTokenResult;
 import cn.xdlr.tl.utils.ResultCode;
-import org.apache.tomcat.websocket.TransformationResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Service
 public class UserTokenService {
@@ -80,11 +78,8 @@ public class UserTokenService {
         return SimpleResult.getInstance(ResultCode.SUCCESS);
     }
 
-    public TokenQueryValueResult queryValue(Integer uid) {
-        if (!userDao.existsById(uid)) {
-            return TokenQueryValueResult.getInstance(ResultCode.TOKEN_USER_NOT_FOUND, 0);
-        }
-        User one = userDao.getOne(uid);
+    public TokenQueryValueResult queryValue(String uid) {
+        User one = userService.getOneById(uid);
         Integer value = one.getValue();
         return TokenQueryValueResult.getInstance(ResultCode.SUCCESS, value);
     }

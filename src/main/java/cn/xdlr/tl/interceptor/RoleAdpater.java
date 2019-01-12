@@ -1,6 +1,5 @@
 package cn.xdlr.tl.interceptor;
 
-import cn.xdlr.tl.dao.ClientAcodeDao;
 import cn.xdlr.tl.service.ClientAcodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
@@ -15,7 +14,9 @@ public class RoleAdpater implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(
-                new RoleInterceptor(service)).addPathPatterns("/user/**").
-                addPathPatterns("/token/**");
+                new RoleInterceptor(service))
+                .addPathPatterns("/user/**")
+                .addPathPatterns("/token/**")
+                .addPathPatterns("/Exhibition/**");
     }
 }

@@ -14,8 +14,8 @@ import java.util.Date;
 public class UserToken {
     @Id
     @GeneratedValue
-    private int id;
-    private int value;
+    private Integer id;
+    private Integer value;
     private String uid;
     private String reason;
     private String url;
@@ -25,7 +25,7 @@ public class UserToken {
     public UserToken() {
     }
 
-    public UserToken(int value, String uid, String reason, String url, Date time) {
+    public UserToken(Integer value, String uid, String reason, String url, Date time) {
         this.value = value;
         this.uid = uid;
         this.reason = reason;
@@ -33,7 +33,7 @@ public class UserToken {
         this.time = time;
     }
 
-    public UserToken(int value, String uid, String reason, String url, Date time, String oNumber) {
+    public UserToken(Integer value, String uid, String reason, String url, Date time, String oNumber) {
         this.value = value;
         this.uid = uid;
         this.reason = reason;
@@ -54,19 +54,19 @@ public class UserToken {
                 '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

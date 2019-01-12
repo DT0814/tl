@@ -1,7 +1,6 @@
 package cn.xdlr.tl.pojo.result;
 
 import cn.xdlr.tl.pojo.UserToken;
-import sun.rmi.runtime.Log;
 
 import java.util.List;
 

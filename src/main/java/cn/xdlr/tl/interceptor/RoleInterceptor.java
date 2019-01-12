@@ -1,6 +1,5 @@
 package cn.xdlr.tl.interceptor;
 
-import cn.xdlr.tl.dao.ClientAcodeDao;
 import cn.xdlr.tl.pojo.ClientAcode;
 import cn.xdlr.tl.pojo.result.SimpleResult;
 import cn.xdlr.tl.service.ClientAcodeService;
@@ -28,6 +27,9 @@ public class RoleInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        if (request.getParameter("cid") == null) {
+            return true;
+        }
         Integer cid = Integer.valueOf(request.getParameter("cid"));
         String acode = request.getParameter("Acode");
         System.out.println(acode);
